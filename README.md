@@ -25,9 +25,9 @@ A Java Swing desktop application for managing students, marks, and academic repo
 
 ---
 
-## ▶️ Quickest Way to Run (Recommended)
+## 🚀 Easiest Way to Install (Recommended)
 
-> Just download **`ScholarMS.jar`** and follow steps 1–3 below. No IDE needed!
+> Just download **`ScholarMS_Setup.exe`** — it installs like a real Windows software!
 
 ### Step 1 — Install Java JDK
 1. Download JDK 17+ from https://www.oracle.com/java/technologies/downloads/
@@ -42,56 +42,22 @@ A Java Swing desktop application for managing students, marks, and academic repo
 6. Click **"Choose File"** → select `database.sql` from this project
 7. Click **"Execute"**
 
-### Step 3 — Run the JAR
-1. Download **`ScholarMS.jar`** from this repository
-2. Double-click it — the app launches immediately! 🎉
-
-> ⚠️ If double-click doesn't work, open a terminal and run:
-> ```bash
-> java -jar ScholarMS.jar
-> ```
+### Step 3 — Install ScholarMS
+1. Download **`ScholarMS_Setup.exe`** from this repository
+2. Double-click it
+3. Click **Next → Next → Install → Finish**
+4. A shortcut appears on your Desktop 🎉
+5. Double-click the shortcut — the app launches!
 
 ---
 
-## 🛠️ For Developers (Run from Source)
+## ▶️ Run without Installing (Alternative)
 
-### Step 4 — Configure Database Connection (if needed)
-Open `src/StudentManagementSystem2.java` and check:
-
-```java
-static final String DB_URL      = "jdbc:mysql://localhost:3306/student_ms";
-static final String DB_USER     = "root";
-static final String DB_PASSWORD = "";
-```
-
-Change `DB_PASSWORD` if your MySQL has a password set.
-
-### Step 5 — Compile and Run from Source
-
-**Option A – Using an IDE (IntelliJ / Eclipse / NetBeans)**
-1. Open the project folder in your IDE
-2. Add `lib/mysql-connector-j-9.7.0.jar` to the project classpath
-3. Run `StudentManagementSystem2.java`
-
-**Option B – Using Command Line (Windows)**
+1. Download **`ScholarMS.jar`** from this repository
+2. Make sure Java is installed
+3. Double-click `ScholarMS.jar` or run:
 ```bash
-# Compile
-javac -cp "lib/mysql-connector-j-9.7.0.jar" src/StudentManagementSystem2.java -d out
-
-# Run
-java -cp "out;lib/mysql-connector-j-9.7.0.jar" StudentManagementSystem2
-```
-> On Mac/Linux, replace `;` with `:`
-
-### Step 6 — Build JAR yourself
-```bash
-# Extract connector into out/
-cd out
-jar xf "../lib/mysql-connector-j-9.7.0.jar"
-cd ..
-
-# Create fat JAR
-jar cfm ScholarMS.jar manifest.txt -C out .
+java -jar ScholarMS.jar
 ```
 
 ---
@@ -104,6 +70,41 @@ jar cfm ScholarMS.jar manifest.txt -C out .
 
 ---
 
+## 🛠️ For Developers (Run from Source)
+
+### Configure Database Connection (if needed)
+Open `src/StudentManagementSystem2.java` and check:
+
+```java
+static final String DB_URL      = "jdbc:mysql://localhost:3306/student_ms";
+static final String DB_USER     = "root";
+static final String DB_PASSWORD = "";
+```
+
+Change `DB_PASSWORD` if your MySQL has a password set.
+
+### Compile and Run from Source (Windows)
+```bash
+# Compile
+javac -cp "lib/mysql-connector-j-9.7.0.jar" src/StudentManagementSystem2.java -d out
+
+# Run
+java -cp "out;lib/mysql-connector-j-9.7.0.jar" StudentManagementSystem2
+```
+
+### Build JAR yourself
+```bash
+# Extract connector into out/
+cd out
+jar xf "C:\path\to\lib\mysql-connector-j-9.7.0.jar"
+cd ..
+
+# Create fat JAR
+jar cfm ScholarMS.jar manifest.txt -C out .
+```
+
+---
+
 ## 📁 Project Structure
 
 ```
@@ -112,10 +113,13 @@ StudentManagementSystem/
 │   └── StudentManagementSystem2.java
 ├── lib/
 │   └── mysql-connector-j-9.7.0.jar
-├── out/                  ← compiled classes
-├── ScholarMS.jar         ← executable JAR (run this!)
+├── out/                      ← compiled classes
+├── ScholarMS.jar             ← executable JAR
+├── ScholarMS.exe             ← Windows executable
+├── ScholarMS_Setup.exe       ← Windows installer (recommended)
 ├── manifest.txt
-├── database.sql
+├── setup_script.iss          ← Inno Setup script
+├── database.sql              ← import this in phpMyAdmin
 └── README.md
 ```
 
@@ -127,6 +131,8 @@ StudentManagementSystem/
 - MySQL (Database)
 - JDBC (Database connectivity)
 - DAO Pattern (Data Access Object)
+- Launch4j (JAR to EXE conversion)
+- Inno Setup (Windows installer)
 
 ---
 
@@ -135,4 +141,5 @@ StudentManagementSystem/
 - Sample student data is included in `database.sql`
 - The system auto-generates Student IDs in format `STD-2025-XXX`
 - Marks are saved per subject, term, and year
-- The JAR is a **fat JAR** — it includes the MySQL connector, no extra setup needed
+- `ScholarMS_Setup.exe` installs the app like a real Windows software
+- The JAR is a fat JAR — includes MySQL connector, no extra classpath needed
